@@ -1,11 +1,11 @@
 require 'spec_helper'
 
 describe Revisionable do
-  describe 'manipulation' do
-    before :each do
-      @user = User.create(:name => 'Silky Johnston')
-    end
+  before :each do
+    @user = User.create(:name => 'Silky Johnston')
+  end
 
+  describe 'revisioning' do
     it 'should have one revision on creation' do
       @user.revisions.count.should equal 1
     end
