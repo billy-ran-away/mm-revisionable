@@ -58,4 +58,15 @@ describe Revisionable do
       @user.revisions.tagged("1.1").name.should == 'Leonard Washington'
     end
   end
+
+  describe 'revisioning of embedded documents' do
+    before :each do
+      @user.posts << Post.new(:title => "Upcoming Playa Hater's Ball")
+      @user.save
+    end
+
+    it 'should create a parent revision when embedded document changes' do
+      expect { @user.posts.first.update_attribute :title, "Upcoming Playa Hata's Ball" }.to change { @user.revisions.count }.by(1)
+    end
+  end
 end
