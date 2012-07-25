@@ -4,14 +4,10 @@ module Revisionable
   extend ActiveSupport::Concern
 
   def create_new_revision
-    unless self.is_a? Revision
-      unless @creating_new_revision
-        @creating_new_revision = true
-        update_attribute :version, revisions.create(:saved_at => updated_at, :data => attributes)
-        version.update_attribute :data, attributes
-        revisions.shift if revisions.count >= self.class.revision_limits
-        @creating_new_revision = false
-      end
+    unless revisions.current.try(:attributes).try(:except, :version_id).to_json == attributes.except(:version_id).to_json
+      update_attribute :version, revisions.create(:saved_at => updated_at, :data => attributes)
+      version.update_attribute :data, attributes
+      revisions.shift if revisions.count >= self.class.revision_limits
     end
   end
 
