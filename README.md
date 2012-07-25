@@ -1,10 +1,10 @@
-MongoMapper Versioning
+MongoMapper Revisionable
 ======================
-A MongoMapper plugin which enables document versioning.
+A MongoMapper plugin which enables document revision tracking.
 
 Install
 -------
-$ gem install mm-versionable
+$ gem install mm-revisionable
 
 Note on Patches/Pull Requests
 -----------------------------
@@ -16,15 +16,16 @@ Note on Patches/Pull Requests
 
 Usage
 -----
-The following example should demonstrate how to use versioning well :
+The following example should demonstrate how to use revisioning well :
 
     require 'mongo_mapper'
-    require 'versionable' # gem 'mm-versionable', :require => 'versionable' -- Put this in your Gemfile if you're using bundler
+    require 'revisionable' # gem 'mm-revisionable', :require => 'revisionable' -- Put this in your Gemfile if you're using bundler
 
     class Thing
         include MongoMapper::Document
+        plugin Revisionable
 
-        enable_versioning :limit => 20
+        limit_revisions_to 20
         #:limit here defines the size of the version history that will be loaded into memory,
         #By default, if not specified, the value is 10, if you wish to load all versions set it to 0
 
