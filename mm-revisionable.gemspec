@@ -1,14 +1,14 @@
 # encoding: UTF-8
-require File.join File.dirname(__FILE__), '/lib/versionable/version'
+require File.join File.dirname(__FILE__), '/lib/revisionable/version'
 
 Gem::Specification.new do |s|
-  s.name                          = 'mm-versionable'
-  s.homepage                      = 'http://github.com/dhruvasagar/mm-versionable'
-  s.summary                       = 'A MongoMapper extension adding Versioning'
+  s.name                          = 'mm-revisionable'
+  s.homepage                      = 'http://github.com/billy-ran-away/mm-revisionable'
+  s.summary                       = 'A MongoMapper extension adding Revisionning'
   s.require_paths                 = ['lib']
-  s.authors                       = ['Dhruva Sagar']
-  s.email                         = 'dhruva.sagar@gmail.com'
-  s.version                       = Versionable::VERSION
+  s.authors                       = ['Bill Transue']
+  s.email                         = 'transue@gmail.com'
+  s.version                       = Revisionable::VERSION
   s.platform                      = Gem::Platform::RUBY
   s.files                         = Dir.glob('lib/**/*') + %w[config.ru Gemfile Rakefile README.md]
   s.test_files                    = Dir.glob('test/**/*')

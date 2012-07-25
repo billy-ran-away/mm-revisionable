@@ -1,14 +1,9 @@
 class User
   include MongoMapper::Document
+  plugin Revisionable
+  limit_revisions_to 20
 
-  attr_accessible :fname, :lname, :email
-
-  enable_versioning :limit => 20
-
-  key :fname, String
-  key :lname, String
-  key :email, String
-  key :address, String
+  key :name, String
 
   many :posts
 end

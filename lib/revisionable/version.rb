@@ -1,3 +1,3 @@
-module Versionable
+module Revisionable
   VERSION = '0.2.8'
 end

@@ -1,14 +1,17 @@
-class Version
+class Revision
   include MongoMapper::Document
 
   key :data, Hash
-  key :date, Time
-  key :pos, Integer
-  key :doc_id, String
+  key :saved_at, Time
   key :message, String
   key :updater_id, String
+  key :tag, String
 
-  ensure_index [[:doc_id, 1], [:pos, -1]]
+  belongs_to :revisionable, :polymorphic => true
+
+  def record
+    revisionable.tap { |object| object.attributes = data }
+  end
 
   def content(key)
     cdata = self.data[key]
@@ -17,5 +20,5 @@ class Version
     else
       cdata
     end
-  end  
+  end
 end
