@@ -57,6 +57,21 @@ describe Revisionable do
       @user.revisions.tagged("1.0").name.should == 'Buck Nasty'
       @user.revisions.tagged("1.1").name.should == 'Leonard Washington'
     end
+
+    it 'should limit revisions' do
+      class ModifiedUser < User
+        limit_revisions_to 2
+      end
+
+      modified_user = ModifiedUser.create(:name => 'Joe Schmoe')
+      modified_user.update_attributes :name => 'Leonard Washington'
+
+      modified_user.revisions.count.should == 2
+
+      modified_user.update_attributes :name => 'Buck Nasty'
+
+      modified_user.revisions.count.should == 2
+    end
   end
 
   describe 'revisioning of embedded documents' do

@@ -7,7 +7,10 @@ module Revisionable
     unless revisions.current.try(:attributes).try(:except, :version_id).to_json == attributes.except(:version_id).to_json
       update_attribute :version, revisions.create(:saved_at => updated_at, :data => attributes)
       version.update_attribute :data, attributes
-      revisions.shift if revisions.count >= self.class.revision_limits
+
+      if self.class.revision_limits
+        revisions.first.delete if revisions.count > self.class.revision_limits
+      end
     end
   end
 
