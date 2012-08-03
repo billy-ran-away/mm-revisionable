@@ -1,5 +1,3 @@
-autoload :Revision, 'revisionable/models/revision'
-
 module Revisionable
   extend ActiveSupport::Concern
 
@@ -21,7 +19,7 @@ module Revisionable
   included do
     timestamps!
 
-    belongs_to :version, :class_name => "revision"
+    belongs_to :version, :class_name => "Revision"
     many :revisions, :as => :revisionable do
       def tagged(tag)
         first(:tag => tag).try :record
