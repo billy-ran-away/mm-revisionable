@@ -1,5 +1,5 @@
 development:
-  database: versionable_dev
+  database: revisionable_dev
 
 test:
-  database: versionable_test
+  database: revisionable_test
